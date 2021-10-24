@@ -1,4 +1,3 @@
-# language: minimal - minimal is image available in Ubuntu Focal dist: focal... It is not tailored to any particular programming language. It is optimized to be faster and use less disk space.
 language: node_js
 
 services:
@@ -31,6 +30,6 @@ install:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push kuchda6/udagram-api-feed
-  - docker push kuchda6/udagram-api-users
+  - docker push kuchda6/udagram-api-user
   - docker push kuchda6/udagram-frontend
   - docker push kuchda6/udagram-reverseproxy
