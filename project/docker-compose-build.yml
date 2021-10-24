@@ -1,0 +1,32 @@
+version: "3"
+services:
+  reverseproxy:
+    build:
+      context: ./udagram-reverseproxy
+    image: kuchda6/reverseproxy
+    networks:
+      - udagram-net
+    expose:
+      - "80"
+  backend_user:
+    build:
+      context: ./udagram-api-user
+    image: kuchda6/udagram-api-user
+    networks:
+    - udagram-net
+  backend_feed:
+    build:
+      context: ./udagram-api-feed
+    image: kuchda6/udagram-api-feed
+    networks:
+      - udagram-net
+  frontend:
+    build:
+      context: ./udagram-frontend
+    image: kuchda6/udagram-frontend:local
+    networks:
+      - udagram-net
+networks:
+  udagram-net:
+    driver: bridge 
+
