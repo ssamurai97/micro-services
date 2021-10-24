@@ -4,16 +4,12 @@ services:
       image: kuchda6/reverseproxy
       restart: always
       ports:
-        - "80"
-      networks:
-      - udagram-net 
+        8080:8080
       depends_on:
         - backend-user
         - backend-feed
   backend-user:
     image: kuchda6/udagram-api-user
-    ports: 
-      - 8080:8080
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
@@ -27,10 +23,6 @@ services:
    
   backend-feed:
     image: kuchda6/udagram-api-feed
-    ports:
-      - 8080:8080
-    networks:
-    - udagram-net
     volumes:
       - $HOME/.aws:/root/.aws
     environment:
@@ -47,8 +39,3 @@ services:
     image: kuchda6/udagram-frontend:local
     ports:
       - "8100:80"
-    networks:
-    - udagram-net 
-networks:
-  udagram-net:
-    driver: bridge 
